@@ -3,28 +3,71 @@ var questions = [
         question: "The sun is made mostly from what element?",
         answers: ["Hydrogen", "Helium", "Nitrogen", "Oxygen"],
         answer: "Hydrogen",
-        img: "http://via.placeholder.com/300?text=Placeholder.com+rocks!"
+        img: "assets/images/hydrogen.png"
     },
 
     question2 = {
         question: "What is the process that 'powers' stars?",
         answers: ["Quantum tunneling", "Nuclear fission", "Nuclear fusion", "Coronal mass ejections"],
         answer: "Nuclear fusion",
-        img: "http://via.placeholder.com/300?text=Placeholder.com+rocks!"
+        img: "assets/images/fusion.png"
     },
 
     quesiton3 = {
         question: "Most stars, when plotted into a graph of color and brightness, fall into a band known as the ...",
         answers: ["Main sequence", "Zenith pattern", "Lagrangian point", "Galaxy rotation curve"],
         answer: "Main sequence",
-        img: "http://via.placeholder.com/300?text=Placeholder.com+rocks!"
+        img: "assets/images/mainsequence.png"
     },
 
     question4 = {
         question: "The final stage for the most massive stars is either a massive explosion known as a supernova or gravitational collapse into a ...",
         answers: ["Black hole", "Nebula", "Red giant", "White dwarf"],
         answer: "Black hole",
-        img: "http://via.placeholder.com/300?text=Placeholder.com+rocks!"
+        img: "assets/images/blackhole.png"
+    },
+
+    question5 = {
+        question: "The Kepler space telescope has found more what than any other telescope?",
+        answers: ["Exoplanets", "Quasars", "Asteroids", "Nebulas"],
+        answer: "Exoplanets",
+        img: "assets/images/exoplanet.png"
+    },
+
+    question6 = {
+        question: "Variances in the Sun's magnetic field can cause some areas on the Sun's surface to be slightly cooler than the surrounding area. These areas are known as what?",
+        answers: ["Convergent voids", "Sunspots", "Dipolar radiance", "Solar wind"],
+        answer: "Sunspots",
+        img: "assets/images/sunspot.png"
+    },
+
+    question7 = {
+        question: "A planet that does not orbit any star, instead wandering through the galaxy alone, is called what?",
+        answers: ["A rogue planet", "A templar", "A planetar", "A dwarf planet"],
+        answer: "A rogue planet",
+        img: "assets/images/rogueplanet.png"
+    },
+
+    question8 = {
+        question: "What is the stellar equivalent of a rogue planet?",
+        answers: ["White hole", "Brown dwarf", "Intergalatic star", "Protostar"],
+        answer: "Intergalatic star",
+        img: "assets/images/intergalacticstar.png"
+    },
+
+    question9 = {
+        question: "Molecular clouds are regions where interstellar gases are slightly more dense, permitting molecules to form. These massive clouds can also give birth to what?",
+        answers: ["Stars", "Dark matter", "Ionized gas", "Galaxies"],
+        answer: "Stars",
+        img: "assets/images/stars.png"
+    },
+
+    question10 = {
+        question: "What was the first (and so far only) spacecraft to enter the interstellar medium?",
+        answers: ["Hubble", "Cassini", "Voyager I", "Venera 9"],
+        answer: "Voyager I",
+        img: "assets/images/voyageri.png"
+
     }
 ]
 
@@ -89,7 +132,7 @@ function timer() {
 function correctAnswer() {
     correct++;
     $("#question").text("Nice! You chose the correct answer!");
-    $("#answers").html("<img src='https://cdn.dribbble.com/users/904380/screenshots/2233565/revised-google-logo.gif' width='300px'>");
+    $("#answers").html("<img src=" + questions[index - 1].img + " width='300px'>");
     clearInterval(tick);
     setTimeout(nextQuestion, 3000);
 }
@@ -97,9 +140,9 @@ function correctAnswer() {
 function wrongAnswer() {
     wrong++;
     $("#question").text("You were wrong. The correct answer is: " + answer);
-    $("#answers").html("<img src='https://cdn.dribbble.com/users/904380/screenshots/2233565/revised-google-logo.gif' width='300px'>");
+    $("#answers").html("<img src=" + questions[index - 1].img + " width='300px'>");
     clearInterval(tick);
-    setTimeout(nextQuestion, 1000);
+    setTimeout(nextQuestion, 3000);
 }
 
 function endScreen() {
@@ -118,45 +161,16 @@ function endScreen() {
 }
 
 $(function () {
-    newGame();
+    $("#start").on("click", function () {
+        newGame();
+        $(this).html("<span id='start' style='display: none'></span>");
+    });
+
     $(document).on("click", "#restart", function () {
         newGame();
     });
 
-    $(document).on("click", "#answer1", function () {
-        if (playing) {
-            var choice = $(this).text();
-            if (choice === answer) {
-                correctAnswer();
-            } else {
-                wrongAnswer();
-            }
-        }
-    });
-
-    $(document).on("click", "#answer2", function () {
-        if (playing) {
-            var choice = $(this).text();
-            if (choice === answer) {
-                correctAnswer();
-            } else {
-                wrongAnswer();
-            }
-        }
-    });
-
-    $(document).on("click", "#answer3", function () {
-        if (playing) {
-            var choice = $(this).text();
-            if (choice === answer) {
-                correctAnswer();
-            } else {
-                wrongAnswer();
-            }
-        }
-    });
-
-    $(document).on("click", "#answer4", function () {
+    $(document).on("click", ".answer", function () {
         if (playing) {
             var choice = $(this).text();
             if (choice === answer) {

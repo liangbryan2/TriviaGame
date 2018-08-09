@@ -1,0 +1,22 @@
+body {
+    background-image: url("../images/background-image.png");
+    font-family: 'Space Mono', monospace;
+    text-shadow: white 0px 0px 10px;
+    text-align: center;
+}
+
+#start {
+    font-size: 75px;
+}
+
+h1 {
+    font-size: 80px;
+}
+
+#timer, .answer, #question {
+    font-size: 30px;
+}
+
+#timer, #question {
+    margin-bottom: 20px;
+}
