@@ -8,7 +8,7 @@ var questions = [
 
     question2 = {
         question: "What is the process that 'powers' stars?",
-        answers: ["Quantum tunneling", "Nuclear fission", "Nuclear fusion", "Coronal mass ejections"],
+        answers: ["Quantum tunneling", "Nuclear fission", "Coronal mass ejections", "Nuclear fusion"],
         answer: "Nuclear fusion",
         img: "assets/images/fusion.png"
     },
@@ -22,7 +22,7 @@ var questions = [
 
     question4 = {
         question: "The final stage for the most massive stars is either a massive explosion known as a supernova or gravitational collapse into a ...",
-        answers: ["Black hole", "Nebula", "Red giant", "White dwarf"],
+        answers: ["Nebula", "Red giant", "White dwarf", "Black hole"],
         answer: "Black hole",
         img: "assets/images/blackhole.png"
     },
@@ -57,14 +57,14 @@ var questions = [
 
     question9 = {
         question: "Molecular clouds are regions where interstellar gases are slightly more dense, permitting molecules to form. These massive clouds can also give birth to what?",
-        answers: ["Stars", "Dark matter", "Ionized gas", "Galaxies"],
+        answers: ["Dark matter", "Ionized gas", "Galaxies", "Stars"],
         answer: "Stars",
         img: "assets/images/stars.png"
     },
 
     question10 = {
         question: "What was the first (and so far only) spacecraft to enter the interstellar medium?",
-        answers: ["Hubble", "Cassini", "Voyager I", "Venera 9"],
+        answers: ["Hubble", "Voyager I", "Cassini", "Venera 9"],
         answer: "Voyager I",
         img: "assets/images/voyageri.png"
 
@@ -101,10 +101,10 @@ function nextQuestion() {
     answer = questions[index].answer;
     $("#question").html(question);
     $("#answers").html(
-        "<p class='answer' id='answer1'></p>" +
-        "<p class='answer' id='answer2'></p>" +
-        "<p class='answer' id='answer3'></p>" +
-        "<p class='answer' id='answer4'></p>");
+        "<button type='button' class='answer choice' id='answer1'></button> <br>" +
+        "<button type='button' class='answer choice' id='answer2'></button> <br>" +
+        "<button type='button' class='answer choice' id='answer3'></button> <br>" +
+        "<button type='button' class='answer' id='answer4'></button> <br>");
     $("#answer1").text(answers[0]);
     $("#answer2").text(answers[1]);
     $("#answer3").text(answers[2]);
@@ -115,6 +115,7 @@ function nextQuestion() {
 function timer() {
     clearInterval(tick);
     time = 30;
+    $("#timer").text("Time left: " + time + " seconds.");
     if (playing) {
         tick = setInterval(function () {
             time--;
@@ -134,7 +135,7 @@ function correctAnswer() {
     $("#question").text("Nice! You chose the correct answer!");
     $("#answers").html("<img src=" + questions[index - 1].img + " width='300px'>");
     clearInterval(tick);
-    setTimeout(nextQuestion, 3000);
+    setTimeout(nextQuestion, 5000);
 }
 
 function wrongAnswer() {
@@ -142,7 +143,7 @@ function wrongAnswer() {
     $("#question").text("You were wrong. The correct answer is: " + answer);
     $("#answers").html("<img src=" + questions[index - 1].img + " width='300px'>");
     clearInterval(tick);
-    setTimeout(nextQuestion, 3000);
+    setTimeout(nextQuestion, 5000);
 }
 
 function endScreen() {
@@ -170,7 +171,7 @@ $(function () {
         newGame();
     });
 
-    $(document).on("click", ".answer", function () {
+    $(document).on("click", ".choice", function () {
         if (playing) {
             var choice = $(this).text();
             if (choice === answer) {
@@ -181,4 +182,14 @@ $(function () {
         }
     });
 
+    $(document).on("click", "#answer4", function () {
+        if (playing) {
+            var choice = $(this).text();
+            if (choice === answer) {
+                correctAnswer();
+            } else {
+                wrongAnswer();
+            }
+        }
+    });
 });

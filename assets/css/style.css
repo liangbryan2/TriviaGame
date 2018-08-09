@@ -20,3 +20,23 @@ h1 {
 #timer, #question {
     margin-bottom: 20px;
 }
+
+button {
+    font-size: 30px;
+    text-shadow: white 0px 0px 10px;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover, #start:hover {
+    text-shadow: yellow 0px 0px 20px;
+    cursor: pointer;
+}
