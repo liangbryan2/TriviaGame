@@ -13,11 +13,30 @@ h1 {
     font-size: 80px;
 }
 
-#timer, .answer, #question {
+#header {
+    animation: typing 3s steps(200, end);
+    white-space: nowrap;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+    to {
+        width: 100%
+    }
+}
+
+#timer,
+.answer,
+#question {
     font-size: 30px;
 }
 
-#timer, #question {
+#timer,
+#question {
     margin-bottom: 20px;
 }
 
@@ -25,18 +44,28 @@ button {
     font-size: 30px;
     text-shadow: white 0px 0px 10px;
     background-color: Transparent;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     border: none;
-    cursor:pointer;
+    cursor: pointer;
     overflow: hidden;
-    outline:none;
+    outline: none;
 }
 
 button:focus {
     outline: none;
 }
 
-button:hover, #start:hover {
+button:hover,
+#start:hover {
     text-shadow: yellow 0px 0px 20px;
     cursor: pointer;
+}
+
+div.a {
+    position: fixed;
+    z-index: -1;
+}
+
+#ufo {
+    width: 50px;
 }

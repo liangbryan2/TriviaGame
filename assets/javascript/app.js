@@ -161,7 +161,81 @@ function endScreen() {
     $("#reset").append("<button type='button' id='restart'>Click to play again.</button>");
 }
 
+// I did not code this part, but it's cool so I'm leaving it in here.
+// It's a flying ufo! I found it while searching for cool animations I could try.
+// I explain my understanding of the code.
+function makeNewPosition(){
+    
+    // Take the dimentions of the window and subtract 50px.
+    // This is so the ufo cannot fly to the edge of the window
+    var h = $(window).height() - 50;
+    var w = $(window).width() - 50;
+    
+    // Set a new height and width with Math random functions for the ufo to fly to.
+    var nh = Math.floor(Math.random() * h);
+    var nw = Math.floor(Math.random() * w);
+    
+    // Return those values in an array
+    return [nh,nw];    
+    
+}
+
+
+// This function is the actual animator
+function animateDiv(){
+    // Take the array from makeNewPosition and hold it in a var
+    var newq = makeNewPosition();
+
+    // .offset() gives the offset of the ufo from the top of the window
+    // and from the left of the window
+    var oldq = $('.a').offset();
+
+    // Speed is how long the ufo takes to complete the animation in milliseconds
+    // calcSpeed is a modifier
+    var speed = calcSpeed([oldq.top, oldq.left], newq);
+    // var speed = 10000;
+    
+    // The actual animation
+    // Take the div.a and move it to the new position
+    $('.a').animate({ top: newq[0], left: newq[1] }, speed, function(){
+      animateDiv();        
+    });
+    
+};
+
+// This is to modify the speed so the animation is more smooth
+// If the new position is right next to the old position,
+// the ufo will travel slower
+// If the new position is farther away, then the ufo will travel faster,
+// So that they reach the new position at roughly the same time, each time.
+function calcSpeed(prev, next) {
+    
+    // take the absolute value of the subtraction of the left offsets
+    var x = Math.abs(prev[1] - next[1]);
+
+    // take the absolute value of the subtraction of the top offsets
+    var y = Math.abs(prev[0] - next[0]);
+    
+    // check to see if x is greater than y, if x is greater than y, return x,
+    // otherwise, return y
+    var greatest = x > y ? x : y;
+    
+    // this is the speed modifier, the larger the number, the faster the ufo goes
+    var speedModifier = 0.1;
+
+    // .ceil is the oposite of .floor, it gives the next largest integer
+    var speed = Math.ceil(greatest/speedModifier);
+
+    return speed;
+
+}
+// End flying ufo code.
+
+
+
+
 $(function () {
+    animateDiv();
     $("#start").on("click", function () {
         newGame();
         $(this).html("<span id='start' style='display: none'></span>");
